@@ -204,6 +204,7 @@ class NDFPointCloudDataset(Dataset[PlacementPointCloudData]):
         if self.num_demo is not None:
             self.filenames = self.filenames[: self.num_demo]
 
+        self.occlusion_cfg = cfg.occlusion_cfg
         self.occlusion_fn = occlusion_fn(cfg.occlusion_cfg)
 
     def get_existing_data_indices(self):
@@ -311,15 +312,15 @@ class NDFPointCloudDataset(Dataset[PlacementPointCloudData]):
         # Apply occlusions
         if self.synthetic_occlusion:
             points_action = self.occlusion_fn(
-                points_action, self.action_class, self.min_num_points
+                points_action, self.action_class, self.min_num_points, "action"
             )
             points_anchor = self.occlusion_fn(
-                points_anchor, self.anchor_class, self.min_num_points
+                points_anchor, self.anchor_class, self.min_num_points, "anchor"
             )
 
         # Downsample
-        points_action = maybe_downsample(points_action, self.min_num_points)
-        points_anchor = maybe_downsample(points_anchor, self.min_num_points)
+        points_action = maybe_downsample(points_action, self.min_num_points, self.occlusion_cfg.downsample_type)
+        points_anchor = maybe_downsample(points_anchor, self.min_num_points, self.occlusion_cfg.downsample_type)
 
         # Symmetry
         (

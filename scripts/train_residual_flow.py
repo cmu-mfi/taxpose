@@ -93,6 +93,16 @@ def main(cfg):
                 save_last=True,
                 every_n_epochs=1,
             ),
+            # ModelCheckpoint(
+            #     dirpath=cfg.lightning.checkpoint_dir,
+            #     filename="{epoch}-{step}",
+            #     monitor="step",
+            #     mode="max",
+            #     save_weights_only=False,
+            #     save_last=True,
+            #     save_top_k=-1,
+            #     every_n_epochs=10,
+            # ),
             # This checkpoint will get saved to WandB. The Callback mechanism in lightning is poorly designed, so we have to put it last.
             ModelCheckpoint(
                 dirpath=cfg.lightning.checkpoint_dir,

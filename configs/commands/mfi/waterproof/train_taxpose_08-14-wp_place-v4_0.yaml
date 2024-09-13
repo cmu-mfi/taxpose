@@ -1,0 +1,56 @@
+# @package _global_
+
+defaults:
+  - /commands/mfi/_train@_here_
+  - override /model: taxpose
+  - override /task: waterproof
+  - override /phase: place
+  - _self_
+
+break_symmetry: False
+
+dm:
+  train_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/08-14-wp/learn_data/train
+      min_num_points: 2048
+      synthetic_occlusion: True
+      occlusion_cfg:
+        action_ball_occlusion: False
+        action_ball_radius: 0.02
+        action_plane_occlusion: True
+        action_plane_standoff: 0.01
+        anchor_ball_occlusion: False
+        anchor_ball_radius: 0.03
+        anchor_plane_occlusion: True
+        anchor_plane_standoff: 0.01
+        downsample_type: random_0.5
+    action_rot_sample_method: "axis_angle"
+    anchor_rot_sample_method: "axis_angle"
+    translation_variance: 0.10
+    rotation_variance: 0.52 # 30 degrees
+  val_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/08-14-wp/learn_data/test
+      min_num_points: 2048
+    action_rot_sample_method: "axis_angle"
+    anchor_rot_sample_method: "axis_angle"
+    translation_variance: 0.01
+    rotation_variance: 0.52 # 30 degrees
+  test_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/08-14-wp/learn_data/test
+      min_num_points: 2048
+    action_rot_sample_method: "axis_angle"
+    anchor_rot_sample_method: "axis_angle"
+    translation_variance: 0.01
+    rotation_variance: 0.52 # 30 degrees
+
+training:
+  batch_size: 8
+  max_epochs: 4000
+
+wandb:
+  entity: shobhitagg
+  project: rtc
+  group: waterproof_place

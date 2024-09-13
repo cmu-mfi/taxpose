@@ -1,0 +1,44 @@
+# @package _global_
+
+defaults:
+  - /commands/ndf/_train@_here_
+  - override /model: taxpose
+  - override /task: mug
+  - override /phase: place
+  - _self_
+
+break_symmetry: False
+
+dm:
+  train_dset:
+    demo_dset:
+      dataset_root: /home/odonca/workspace/rpad/data/abb/gi_kit/train_data/single_part_kit_surface
+      min_num_points: 2048
+      synthetic_occlusion: True
+      occlusion_cfg:
+        plane_occlusion: True
+        ball_occlusion: False
+        downsample_type: 2N_random_fps
+        plane_standoff: 0.01
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  val_dset:
+    demo_dset:
+      dataset_root: /home/odonca/workspace/rpad/data/abb/gi_kit/test_data/single_part_kit_surface
+      min_num_points: 2048
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  test_dset:
+    demo_dset:
+      dataset_root: /home/odonca/workspace/rpad/data/abb/gi_kit/test_data/single_part_kit_surface
+      min_num_points: 2048
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+
+training:
+  batch_size: 6
+  max_epochs: 2000
+
+wandb:
+  project: abb
+  group: single_part_kit_surface

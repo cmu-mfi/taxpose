@@ -1,0 +1,35 @@
+job_type: eval_mfi_${task.name}
+
+defaults:
+  - _logging
+  - _self_
+
+  - object_class: waterproof #{mug, bottle, bowl}
+
+  # Machinery to load the correct model architecture.
+  # The model config can be found in configs/model.
+  - model@grasp_model: taxpose
+  - model@place_model: taxpose
+
+  # Task-specific settings.
+  - task: mfi/${object_class}/task
+  - task@grasp_task: mfi/${object_class}/phase/grasp
+  - task@place_task: mfi/${object_class}/phase/place
+
+  # Load the checkpoints appropriately.
+  - checkpoints/mfi@grasp_checkpoints: ${object_class}/${model@grasp_model}
+  - checkpoints/mfi@place_checkpoints: ${object_class}/${model@place_model}
+
+policy_spec:
+  grasp_model: ${grasp_model}
+  place_model: ${place_model}
+
+checkpoints:
+  grasp: ${grasp_checkpoints.grasp}
+  place: ${place_checkpoints.place}
+
+num_trials: 100
+headless: True
+
+# For prediction.
+z_offset: 0.03

@@ -1,0 +1,48 @@
+# @package _global_
+
+defaults:
+  - /commands/mfi/_eval@_here_
+  - override /model@place_model: taxpose
+  - override /model@grasp_model: taxpose
+  - override /object_class: waterproof
+  - _self_
+
+place_model:
+  break_symmetry: False
+grasp_model:
+  break_symmetry: False
+
+dm:
+  train_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/06-20-wp/learn_data/train
+      min_num_points: 2048
+      synthetic_occlusion: False
+      occlusion_cfg:
+        plane_occlusion: True
+        ball_occlusion: False
+        downsample_type: fps
+        plane_standoff: 0.01
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  val_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/06-20-wp/learn_data/test
+      min_num_points: 2048
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  test_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/demonstrations/06-20-wp/learn_data/test
+      min_num_points: 2048
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+
+training:
+  batch_size: 6
+  max_epochs: 2000
+
+wandb:
+  entity: shobhitagg
+  project: rtc
+  group: waterproof_place

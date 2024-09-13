@@ -14,7 +14,8 @@ def ball_occlusion(points, radius=0.05):
     idx = torch.randint(points.shape[0], [1])
     center = points[idx]
 
-    ret = ball_query(center.unsqueeze(0), points.unsqueeze(0), radius=radius)
+    radius_ = max(torch.rand(1) * radius, radius*0.1)
+    ret = ball_query(center.unsqueeze(0), points.unsqueeze(0), radius=radius_, K=points.shape[0])
     mask = torch.isin(
         torch.arange(points.shape[0], device=points.device), ret.idx[0], invert=True
     )

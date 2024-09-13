@@ -3,7 +3,7 @@ name = "taxpose"
 version = "0.1.0"
 description = "TAX-Pose: Task-Specific Cross-Pose Estimation for Robot Manipulation"
 readme = "README.md"
-requires-python = ">=3.6, <3.10" # ndf_robot requires < 3.10 :(
+requires-python = ">=3.6, <=3.10.12" # ndf_robot requires < 3.10 :(
 license = { file = "LICENSE.txt" }
 authors = [
   { email = "chuerp@andrew.cmu.edu", name = "Chuer Pan" },
@@ -29,12 +29,6 @@ dependencies = [
   "rpad-partnet-mobility-utils @ git+https://github.com/r-pad/partnet_mobility_utils.git",
   "rpad-pyg @ git+https://github.com/r-pad/pyg_libs.git",
   "rpad-visualize-3d @ git+https://github.com/r-pad/visualize_3d.git",
-  "torch ~= 1.11",
-  "torch_cluster ~= 1.6.0",
-  "torch-geometric ~= 2.2.0",
-  "torch_scatter ~= 2.0.9",
-  "torch_sparse ~= 0.6.15",
-  "torch_spline_conv ~= 1.2.1",
   "wandb",
 ]
 

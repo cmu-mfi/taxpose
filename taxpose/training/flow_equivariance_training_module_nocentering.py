@@ -357,6 +357,8 @@ class EquivarianceTrainingModule(PointCloudTrainingModule):
         T0 = Transform3d(matrix=batch["T0"])
         T1 = Transform3d(matrix=batch["T1"])
 
+        torch.save(batch, '/home/mfi/repos/rtc_vision_toolbox/test/debug.pt')
+
         model_output = self.model(
             points_trans_action,
             points_trans_anchor,
@@ -395,7 +397,7 @@ class EquivarianceTrainingModule(PointCloudTrainingModule):
 
         x_action = model_output["flow_action"]
         x_anchor = model_output["flow_anchor"]
-
+        
         pred_flow_action = x_action[:, :, :3]
         if x_action.shape[2] > 3:
             if self.sigmoid_on:

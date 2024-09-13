@@ -29,7 +29,7 @@ defaults:
   - task/${benchmark}/${task}/phase/${phase}@task.phase
 
   # Set the pretraining checkpoint.
-  - /checkpoints/${benchmark}/${task}/pretraining/${phase}@model.pretraining
+  # - /checkpoints/${benchmark}/${task}/pretraining/${phase}@model.pretraining
 
   # - optional checkpoints/ndf@checkpoints: ${object_class}/${model}
 
@@ -62,7 +62,7 @@ training:
   checkpoint_file: null
 
   # Visualization Settings
-  image_logging_period: 100
+  image_logging_period: 1001
   log_every_n_steps: 100
   check_val_every_n_epoch: 5
 

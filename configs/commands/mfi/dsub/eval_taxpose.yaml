@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - /commands/mfi/_eval@_here_
+  - override /model@place_model: taxpose
+  - override /model@grasp_model: taxpose
+  - override /object_class: dsub
+  - _self_
+
+place_model:
+  break_symmetry: False
+grasp_model:
+  break_symmetry: False

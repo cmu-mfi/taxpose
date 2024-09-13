@@ -1,0 +1,45 @@
+# @package _global_
+
+defaults:
+  - /commands/ndf/_train@_here_
+  - override /model: taxpose
+  - override /task: mug
+  - override /phase: place
+  - _self_
+
+break_symmetry: False
+
+dm:
+  train_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/train_data/taxpose/nist_waterproof/place/train
+      min_num_points: 1024
+      synthetic_occlusion: False
+      occlusion_cfg:
+        plane_occlusion: True
+        ball_occlusion: False
+        downsample_type: fps
+        plane_standoff: 0.01
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  val_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/train_data/taxpose/nist_waterproof/place/test
+      min_num_points: 1024
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+  test_dset:
+    demo_dset:
+      dataset_root: /home/mfi/repos/rtc_vision_toolbox/data/train_data/taxpose/nist_waterproof/place/test
+      min_num_points: 1024
+    action_rot_sample_method: "quat_uniform"
+    anchor_rot_sample_method: "random_flat_upright"
+
+training:
+  batch_size: 6
+  max_epochs: 2000
+
+wandb:
+  entity: oadonca
+  project: rtc
+  group: waterproof_place

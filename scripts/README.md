@@ -1,3 +1,12 @@
+# MFI
+
+```
+# Run training example
+WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=1 python scripts/train_residual_flow.py --config-name commands/mfi/waterproof/train_taxpose_waterproof_place_1demo.yaml
+```
+
+
+
 # Scripts for your project
 
 If you write some scripts which are meant to be run stand-alone, and not imported as part of the library, put them in this directory.

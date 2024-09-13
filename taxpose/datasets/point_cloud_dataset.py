@@ -47,7 +47,7 @@ class PointCloudDatasetConfig:
 def make_dataset(
     cfg: PlacementPointCloudDatasetConfig,
 ) -> PlacementPointCloudDataset:
-    if cfg.dataset_type == "ndf":
+    if cfg.dataset_type in ["ndf", "mfi"]:
         import taxpose.datasets.ndf as ndf
 
         return ndf.NDFPointCloudDataset(cast(ndf.NDFPointCloudDatasetConfig, cfg))
@@ -187,7 +187,7 @@ class PointCloudDataset(Dataset):
             if data["anchor_symmetry_rgb"] is not None
             else None
         )
-
+        
         T0 = random_se3(
             1,
             rot_var=self.rot_var,
@@ -272,7 +272,7 @@ class PointCloudDataset(Dataset):
         # The core idea here is that we want those symmetry features to be semantically meaningful during
         # demonstrations, so we need to compute them before transforming everything.
         # At test time, there should be a DIFFERENT PROCEDURE!!!
-        if self.demo_dset_cfg.dataset_type == "ndf":
+        if self.demo_dset_cfg.dataset_type in ["ndf", "mfi"]:
             pass
 
         elif self.demo_dset_cfg.dataset_type == "rlbench":

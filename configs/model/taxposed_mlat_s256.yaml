@@ -1,0 +1,9 @@
+defaults:
+  - _taxposed
+
+name: taxposed_mlat_s256
+
+multilaterate: True
+mlat_sample: True
+mlat_nkps: 256
+break_symmetry: False
