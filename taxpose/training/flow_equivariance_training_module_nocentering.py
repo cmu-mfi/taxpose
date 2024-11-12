@@ -357,8 +357,6 @@ class EquivarianceTrainingModule(PointCloudTrainingModule):
         T0 = Transform3d(matrix=batch["T0"])
         T1 = Transform3d(matrix=batch["T1"])
 
-        torch.save(batch, '/home/mfi/repos/rtc_vision_toolbox/test/debug.pt')
-
         model_output = self.model(
             points_trans_action,
             points_trans_anchor,
